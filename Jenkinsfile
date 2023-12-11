@@ -12,6 +12,7 @@ steps {
 stage ('Docker Build') {
     steps {
       sh 'echo ${DOCKER_TAG}'
+      sh 'pwd'
         sh 'docker build -t emnabenzina/testangular:${DOCKER_TAG} .'
     }
 }
