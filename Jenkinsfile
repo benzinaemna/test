@@ -17,8 +17,9 @@ stage ('Docker Build') {
 }
       }
 
+
       }
-      }
+      
 def getVersion(){
     def version = sh returnStdout: true,script: 'git rev-parse --short HEAD'
     return version.trim()
