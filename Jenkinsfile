@@ -11,7 +11,7 @@ steps {
 }
 stage ('Docker Build') {
     steps (
-      sh "echo ${DOCKER_TAG}"
+      sh 'echo ${DOCKER_TAG}'
         sh "sudo docker build -t emnabenzina/testAngular:${DOCKER_TAG} ."
     }
 }
