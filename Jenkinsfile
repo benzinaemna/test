@@ -6,7 +6,7 @@ environment {
 stages {
 stage ('Clone Stage') {
 steps {
-    git 'https://github.com/benzinaemna/test.git'
+    git branch:'main',url:'https://github.com/benzinaemna/test.git'
 }
 }
 
