@@ -10,22 +10,22 @@ steps {
 }
 }
 stage ('Docker Build') {
-    steps {
-        bat 'docker build -t emnabenzina/image_name:${DOCKER_TAG}.'
+    steps (
+        sh 'sudo docker build -t emnabenzina/image_name:${DOCKER_TAG}.'
     }
 }
 stage ('DockerHub Push') {
     steps {
         withCredentials([string(credentialsId: 'emnabenzina', variable: 'dockerHubPwd')]) {
-            bat 'docker login -u emnabenzina -p ${DockerHubPassword}'
+            sh 'sudo docker login -u emnabenzina -p ${DockerHubPassword}'
         }
-        bat 'docker push emnabenzina/image_name:${DOCKER_TAG}'
+        sh 'sudo docker push emnabenzina/image_name:${DOCKER_TAG}'
 }
 }
 
 }
 }
 def getVersion(){
-    def version = bat returnStdout: true,script: 'git rev-parse --short HEAD'
+    def version = sh returnStdout: true,script: 'git rev-parse --short HEAD'
     return version
 }
