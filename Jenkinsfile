@@ -11,7 +11,7 @@ steps {
 }
 stage ('Docker Build') {
     steps (
-        sh "sudo docker build -t emnabenzina/image_name:${DOCKER_TAG}."
+        sh "sudo docker build -t emnabenzina/testAngular:${DOCKER_TAG}."
     }
 }
 stage ('DockerHub Push') {
@@ -19,7 +19,7 @@ stage ('DockerHub Push') {
         withCredentials([string(credentialsId: 'emnabenzina', variable: 'dockerHubPwd')]) {
             sh "sudo docker login -u emnabenzina -p ${DockerHubPassword}"
         }
-        sh "sudo docker push emnabenzina/image_name:${DOCKER_TAG}"
+        sh "sudo docker push emnabenzina/testAngular:${DOCKER_TAG}"
 }
 }
 
