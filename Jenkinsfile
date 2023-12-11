@@ -19,7 +19,7 @@ stage ('DockerHub Push') {
     steps {
         withCredentials([string(credentialsId: 'emnabenzina', variable: 'dockerHubPwd')]) {
           script{
-            sh "sudo docker login -u emnabenzina -p ${DockerHubPwd}"
+            sh "sudo docker login -u emnabenzina -p ${dockerHubPwd}"
         sh "sudo docker push emnabenzina/testAngular:${DOCKER_TAG}"
 }
 }
