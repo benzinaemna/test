@@ -1,6 +1,5 @@
 pipeline {
 agent any
-tools{ jdk 'java17' }
 environment {
    DOCKER_TAG = getVersion()
 }
