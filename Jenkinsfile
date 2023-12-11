@@ -16,9 +16,16 @@ stage ('Docker Build') {
         sh 'docker build -t emnabenzina/testangular:${DOCKER_TAG} .'
     }
 }
+    stage ('DockerHub Push') {
+    steps {
+        withCredentials([string(credentialsId: 'emnabenzina', variable: 'dockerHubPwd')]) {
+            sh "sudo docker login -u emnabenzina -p ${dockerHubPwd}"
+}
+         sh "sudo docker push emnabenzina/testAngular:${DOCKER_TAG}"
+
+}
+}
       }
-
-
       }
       
 def getVersion(){
