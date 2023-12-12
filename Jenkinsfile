@@ -11,8 +11,8 @@ steps {
 }
 stage ('Docker Build') {
     steps {
-      bat 'echo ${DOCKER_TAG}'
-        bat 'docker build -t emnabenzina/testangular:${DOCKER_TAG} .'
+      bat 'echo '+ DOCKER_TAG
+        bat 'docker build -t emnabenzina/testangular:'+DOCKER_TAG+'.'
     }
 }
     stage ('DockerHub Push') {
@@ -29,6 +29,6 @@ stage ('Docker Build') {
       
 def getVersion(){
     def version = bat returnStdout: true,script: 'git rev-parse --short HEAD'
-      bat 'echo ${version.trim()}'
+      bat 'echo '+version.trim()
     return version.trim()
 }
