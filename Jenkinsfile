@@ -12,7 +12,6 @@ steps {
 stage ('Docker Build') {
     steps {
       bat 'echo ${DOCKER_TAG}'
-      bat 'pwd'
         bat 'docker build -t emnabenzina/testangular:${DOCKER_TAG} .'
     }
 }
