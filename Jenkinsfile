@@ -11,7 +11,7 @@ steps {
 }
 stage ('Docker Build') {
     steps {
-        bat 'docker build -t emnabenzina/testangular:'+DOCKER_TAG+'.'
+        bat 'docker build -t emnabenzina/testangular:%DOCKER_TAG% .'
     }
 }
     stage ('DockerHub Push') {
