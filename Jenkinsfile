@@ -11,17 +11,17 @@ steps {
 }
 stage ('Docker Build') {
     steps {
-      sh 'echo ${DOCKER_TAG}'
-      sh 'pwd'
-        sh 'docker build -t emnabenzina/testangular:${DOCKER_TAG} .'
+      bat 'echo ${DOCKER_TAG}'
+      bat 'pwd'
+        bat 'docker build -t emnabenzina/testangular:${DOCKER_TAG} .'
     }
 }
     stage ('DockerHub Push') {
     steps {
         withCredentials([string(credentialsId: 'emnabenzina', variable: 'dockerHubPwd')]) {
-            sh "docker login -u emnabenzina -p ${dockerHubPwd}"
+            bat "docker login -u emnabenzina -p ${dockerHubPwd}"
 }
-         sh "docker push emnabenzina/testangular:${DOCKER_TAG}"
+         bat "docker push emnabenzina/testangular:${DOCKER_TAG}"
 
 }
 }
@@ -29,6 +29,6 @@ stage ('Docker Build') {
       }
       
 def getVersion(){
-    def version = sh returnStdout: true,script: 'git rev-parse --short HEAD'
+    def version = bat returnStdout: true,script: 'git rev-parse --short HEAD'
     return version.trim()
 }
