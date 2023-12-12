@@ -12,7 +12,7 @@ steps {
 stage ('Docker Build') {
     steps {
       bat 'echo ${DOCKER_TAG}'
-        bat 'docker build -t emnabenzina/testangular:${DOCKER_TAG} .'
+        bat 'docker build -t emnabenzina/DataCamp:${DOCKER_TAG} .'
     }
 }
     stage ('DockerHub Push') {
@@ -20,7 +20,7 @@ stage ('Docker Build') {
         withCredentials([string(credentialsId: 'emnabenzina', variable: 'dockerHubPwd')]) {
             bat "docker login -u emnabenzina -p ${dockerHubPwd}"
 }
-         bat "docker push emnabenzina/testangular:${DOCKER_TAG}"
+         bat "docker push emnabenzina/DataCamp:${DOCKER_TAG}"
 
 }
 }
