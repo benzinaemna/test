@@ -28,7 +28,7 @@ stage ('Docker Build') {
         sshagent(credentials: ['Vagrant_ssh']) {
         bat "ssh admin@172.17.0.1"
 //sh "scp target/hello-world-app-1.0-SNAPSHOT.jar vagrant@192.168.1.201:/home/vagrant"
-        bat "ssh admin@172.17.0.1 'docker run "image_name ${DOCKER_TAG}"'"
+        bat "ssh admin@172.17.0.1 'docker run image_name:${DOCKER_TAG}'"
 }
 }
 }
