@@ -11,30 +11,30 @@ steps {
 }
 stage ('Docker Build') {
     steps {
-        bat 'docker build -t emnabenzina/testangular .'
+        sh 'docker build -t emnabenzina/testangular .'
     }
 }
     stage ('DockerHub Push') {
     steps {
         withCredentials([string(credentialsId: 'emnabenzina', variable: 'dockerHubPwd')]) {
-            bat "docker login -u emnabenzina -p ${dockerHubPwd}"
+            sh "docker login -u emnabenzina -p ${dockerHubPwd}"
 }
-         bat "docker push emnabenzina/testangular"
+         sh "docker push emnabenzina/testangular"
 
 }
 }
     stage ('Deploy') {
     steps{
         sshagent(credentials: ['emnab']) {
-        bat "ssh vagrant@10.10.0.233"
+        sh "ssh vagrant@10.10.0.233"
 //sh "scp target/hello-world-app-1.0-SNAPSHOT.jar vagrant@192.168.1.201:/home/vagrant"
-        bat "ssh vagrant@10.10.0.233 'docker run image_name:${DOCKER_TAG}'"
+        sh "ssh vagrant@10.10.0.233 'docker run image_name:${DOCKER_TAG}'"
 }
 }
 }
 }
 }
 def getVersion() {
-    def version = bat returnStdout: true, script: 'git rev-parse --short HEAD'
+    def version = sh returnStdout: true, script: 'git rev-parse --short HEAD'
     return version.trim()
 }
