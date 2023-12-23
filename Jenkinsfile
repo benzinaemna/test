@@ -23,6 +23,9 @@ stage ('Docker Build') {
 
 }
 }
+  stage ('Pre_Deploy') {
+    sh "ssh -t -t vagrant@10.10.0.145"
+  }
     stage ('Deploy') {
     steps{
         sshagent(credentials: ['Vagrant_ssh']) {
