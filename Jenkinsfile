@@ -11,7 +11,7 @@ steps {
 }
 stage ('Docker Build') {
     steps {
-        sh 'docker build -t emnabenzina/testangular .'
+        sh 'docker build -t emnabenzina/testangular:${DOCKER_TAG} .'
     }
 }
     stage ('DockerHub Push') {
@@ -19,14 +19,14 @@ stage ('Docker Build') {
         withCredentials([string(credentialsId: 'emnabenzina', variable: 'dockerHubPwd')]) {
             sh "docker login -u emnabenzina -p ${dockerHubPwd}"
 }
-         sh "docker push emnabenzina/testangular"
+         sh "docker push emnabenzina/testangular:${DOCKER_TAG}"
 
 }
 }
   stage ('Pre_Deploy') {
       steps {
          sshagent(credentials: ['Vagrant_ssh']) {
-    sh "ssh -T vagrant@10.10.0.145"
+    sh "ssh -T vagrant@10.10.0.145 'docker --version'"
          }
       }
   }
@@ -35,7 +35,7 @@ stage ('Docker Build') {
         sshagent(credentials: ['Vagrant_ssh']) {
         sh "ssh -T vagrant@10.10.0.145"
 //sh "scp target/hello-world-app-1.0-SNAPSHOT.jar vagrant@192.168.1.201:/home/vagrant"
-        sh "ssh -T vagrant@10.10.0.145 'docker run image_name:${DOCKER_TAG}'"
+        sh "ssh -T vagrant@10.10.0.145 'docker run emnabenzina/testangular:${DOCKER_TAG}'"
 }
 }
 }
