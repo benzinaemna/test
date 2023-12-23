@@ -19,7 +19,7 @@ stage ('Docker Build') {
         withCredentials([string(credentialsId: 'emnabenzina', variable: 'dockerHubPwd')]) {
             sh "docker login -u emnabenzina -p ${dockerHubPwd}"
 }
-         sh "docker push emnabenzina/testangular:${DOCKER_TAG}"
+         sh "docker push emnabenzina/testangular"
 
 }
 }
