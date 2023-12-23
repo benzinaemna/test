@@ -11,15 +11,15 @@ steps {
 }
 stage ('Docker Build') {
     steps {
-        sh 'sudo docker build -t emnabenzina/testangular .'
+        sh 'docker build -t emnabenzina/testangular .'
     }
 }
     stage ('DockerHub Push') {
     steps {
         withCredentials([string(credentialsId: 'emnabenzina', variable: 'dockerHubPwd')]) {
-            sh "sudo docker login -u emnabenzina -p ${dockerHubPwd}"
+            sh "docker login -u emnabenzina -p ${dockerHubPwd}"
 }
-         sh "sudo docker push emnabenzina/testangular"
+         sh "docker push emnabenzina/testangular"
 
 }
 }
