@@ -19,7 +19,7 @@ stage ('Docker Build') {
         withCredentials([string(credentialsId: 'emnabenzina', variable: 'dockerHubPwd')]) {
             sh "docker login -u emnabenzina -p ${dockerHubPwd}"
 }
-         sh "docker push emnabenzina/testangular"
+         sh "docker push emnabenzina/testangular:${DOCKER_TAG}"
 
 }
 }
@@ -35,7 +35,7 @@ stage ('Docker Build') {
         sshagent(credentials: ['Vagrant_ssh']) {
        
 //sh "scp target/hello-world-app-1.0-SNAPSHOT.jar vagrant@192.168.1.201:/home/vagrant"
-        sh "ssh -T vagrant@10.10.0.145 'docker run emnabenzina/testangular:${DOCKER_TAG}'"
+        sh "ssh -T vagrant@10.10.0.145 'docker run emnabenzina/testangular'"
 }
 }
 }
