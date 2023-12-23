@@ -25,7 +25,7 @@ stage ('Docker Build') {
 }
   stage ('Pre_Deploy') {
       steps {
-    sh "ssh -t -t vagrant@10.10.0.145"
+    sh "ssh -o StrictHostKeyChecking=no vagrant@10.10.0.145"
       }
   }
     stage ('Deploy') {
