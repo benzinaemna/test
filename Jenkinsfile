@@ -26,7 +26,7 @@ stage ('Docker Build') {
   stage ('Pre_Deploy') {
       steps {
          sshagent(credentials: ['Vagrant_ssh']) {
-    sh "ssh -o StrictHostKeyChecking=no vagrant@10.10.0.145"
+    sh "ssh -T vagrant@10.10.0.145"
          }
       }
   }
